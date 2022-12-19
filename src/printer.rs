@@ -69,6 +69,10 @@ impl<W: io::Write> Printer<W> {
         self.writer.flush()
     }
 
+    pub fn get_ref(&self) -> &W {
+        self.writer.get_ref()
+    }
+
     pub fn chain_hwinit(&mut self) -> io::Result<&mut Self> {
         self.hwinit().map(|_| self)
     }
