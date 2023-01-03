@@ -118,6 +118,23 @@ impl Image {
         }
         data.into_boxed_slice()
     }
+
+    #[allow(clippy::many_single_char_names)]
+    pub fn get_raster_reverse(&self) -> Box<[u8]> {
+        let n = (self.width + 7) / 8; // Number of bytes per line
+        let mut data: Vec<u8> = vec![0; (n * self.height) as usize];
+        for y in 0..self.height {
+            for x in 0..n {
+                for b in 0..8 {
+                    let i = x * 8 + b;
+                    if i < self.width && self.is_blank_pixel(i, y) {
+                        data[(y * n + x) as usize] += 0x80 >> (b & 0x7);
+                    }
+                }
+            }
+        }
+        data.into_boxed_slice()
+    }
 }
 
 pub struct BitimageLines<'a> {
