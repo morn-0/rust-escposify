@@ -21,7 +21,7 @@ qrcode_builder = ["qrcode"]
 encoding = "0.2"
 byteorder = "1.4"
 image = "0.25"
-rusb = "0.9.3"
+# rusb = "0.9.3"
 
 qrcode =  { version = "0.12", optional = true }
 
